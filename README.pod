@@ -1,0 +1,35 @@
+=pod
+
+=head2 NAME
+
+Rex::Client
+
+=head2 DESCRIPTION
+
+Aruby library to access Rex::Server API
+
+=head2 SYNOPSIS
+
+ require 'rex/client'
+ require 'rex/server_list'
+ require 'rex/server'
+     
+ include Rex
+     
+ client = Rex::Client::Connection.new(:endpoint => "127.0.0.1", :port => 3000)
+     
+ server_list = Rex::ServerList.new()
+ server_list.add(
+    Rex::Server.new(
+       :name        => "c6test0232",
+       :user        => "root",
+       :private_key => "/home/jan/.ssh/id_rsa",
+       :public_key  => "/home/jan/.ssh/id_rsa.pub",
+    )
+ )
+      
+ answer = client.run(server_list, "hostname")
+    
+ answer.each do |server,value|
+    puts "#{server} > #{value[:stdout].join("\n")}"
+ end
