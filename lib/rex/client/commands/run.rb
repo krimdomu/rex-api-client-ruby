@@ -10,19 +10,13 @@ module Rex
          module Run
 
             def run(server_list, cmd)
-               data = send(
+               send(
                   "/api/1.0/run", 
                   {
                      "args" => [cmd],
                   },
                   server_list
                )
-
-               if data != nil
-                  data
-               else
-                  return nil
-               end
             end
 
          end

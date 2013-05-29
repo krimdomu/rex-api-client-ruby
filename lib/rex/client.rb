@@ -9,6 +9,7 @@ require 'net/http'
 require 'json'
 
 require 'rex/client/commands/run'
+require 'rex/client/commands/package'
 
 module Rex
 
@@ -17,6 +18,7 @@ module Rex
       class Connection
 
          include Rex::Client::Commands::Run
+         include Rex::Client::Commands::Package
 
          attr_accessor :endpoint
          attr_accessor :port
@@ -50,13 +52,7 @@ module Rex
                   when Net::HTTPSuccess
                      ref = JSON.parse(res.body)
                      if ref["ok"] == true
-                        ret_data = ref["return"]
-
-                        ret_data.keys.each do |key|
-                           ret_data[(key.to_sym rescue key) || key] = ret_data.delete(key)
-                        end
-
-                        answers[server.name] = ret_data
+                        answers[server.name] = ref["return"]
                      else
                         answers[server.name] = nil
                      end

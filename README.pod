@@ -31,5 +31,5 @@ Aruby library to access Rex::Server API
  answer = client.run(server_list, "hostname")
     
  answer.each do |server,value|
-    puts "#{server} > #{value[:stdout].join("\n")}"
+    puts "#{server} > #{value["stdout"].join("\n")}"
  end
