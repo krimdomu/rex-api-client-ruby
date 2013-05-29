@@ -33,3 +33,6 @@ Aruby library to access Rex::Server API
  answer.each do |server,value|
     puts "#{server} > #{value["stdout"].join("\n")}"
  end
+    
+ answer = client.install(server_list, "vim-enhanced")
+ answer = client.remove(server_list, "vim-enhanced")
